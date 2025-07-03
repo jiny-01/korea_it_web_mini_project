@@ -7,11 +7,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 
 import java.security.Key;
 import java.util.Date;
 
+@Component
 public class JwtUtils {
 
     private final Key KEY;
@@ -31,7 +33,8 @@ public class JwtUtils {
                 .compact();
     }
 
-    //로그인 시 토큰 줌 -> 토큰이 Bearer 토큰인지 확인
+    // isBearer
+    // 로그인 시 토큰 줌 -> 토큰이 Bearer 토큰인지 확인
     public boolean isBearer(String token) {
         if(token == null) {
             return false;
@@ -43,10 +46,10 @@ public class JwtUtils {
     }
 
 
-    //Bearer 토큰 : - 이 형식에서 Bearer 부분 없애고 토큰만 추출
+    // removeBearer
+    // Bearer 토큰 : - 이 형식에서 Bearer 부분 없애고 토큰만 추출
     public String removeBearer(String token) {
         return token.replaceFirst("Bearer ", "");
-
     }
 
 
