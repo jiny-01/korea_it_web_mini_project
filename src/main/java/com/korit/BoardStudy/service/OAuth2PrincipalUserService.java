@@ -31,6 +31,10 @@ public class OAuth2PrincipalUserService extends DefaultOAuth2UserService {
             case "google":
                 id = attributes.get("sub").toString();
                 email = (String) attributes.get("email");
+
+                if (id == null) {
+                    id = (String) attributes.get("sub"); // id 없으면 sub 사용
+                }
                 break;
             case "naver":
                 Map<String, Object> response = (Map<String, Object>) attributes.get("response");
@@ -40,7 +44,8 @@ public class OAuth2PrincipalUserService extends DefaultOAuth2UserService {
             case "kakao":
                 id = attributes.get("id").toString();
                 Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
-                email = (String) kakaoAccount.get("email");
+//                email = (String) kakaoAccount.get("email");
+                email = "example@gmail.com";
                 break;
         }
 
