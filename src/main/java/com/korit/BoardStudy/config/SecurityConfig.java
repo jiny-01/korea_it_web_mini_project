@@ -1,6 +1,9 @@
 package com.korit.BoardStudy.config;
 
 import com.korit.BoardStudy.security.filter.JwtAuthenticationFilter;
+import com.korit.BoardStudy.security.handler.OAuth2SuccessHandler;
+import com.korit.BoardStudy.service.OAuth2PrincipalUserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +22,12 @@ public class SecurityConfig {
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    private OAuth2PrincipalUserService oAuth2PrincipalUserService;
+
+    @Autowired
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -51,9 +60,18 @@ public class SecurityConfig {
         //필터 적용
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/auth/**").permitAll();    //요청주소 - 허용할 주소
+            auth.requestMatchers("/auth/**", "/oauth2/**", "/login/oauth2/**").permitAll();    //요청주소 - 허용할 주소
             auth.anyRequest().authenticated();                 //위에 주소 제외 모든 요청은 인증필요
         });
+
+        //OAuth2 설정 추가
+        http.oauth2Login(oauth2 -> oauth2
+                .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2PrincipalUserService))
+                .successHandler(oAuth2SuccessHandler)
+        );
+
+
+
         return http.build();
     }
 }
