@@ -33,13 +33,23 @@ public class JwtUtils {
                 .compact();
     }
 
+    //이메일 인증용 토큰 생성하기
+    public String generateVerifyToken(String id) {
+        return Jwts.builder()
+                .subject("VerifyToken")
+                .id(id)
+                .expiration(new Date(new Date().getTime() + (1000L * 60L * 3L)))
+                .signWith(KEY)
+                .compact();
+    }
+
     // isBearer
     // 로그인 시 토큰 줌 -> 토큰이 Bearer 토큰인지 확인
     public boolean isBearer(String token) {
         if(token == null) {
             return false;
         }
-        if (token.startsWith("Bearer ")) {
+        if (!token.startsWith("Bearer ")) {
             return false;
         }
         return true;
