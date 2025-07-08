@@ -52,7 +52,7 @@
             role_id = 2,
             update_dt = now()
         where
-            user_role_id = #{userRoleId}
+            user_role_id = #{userRoleId} and
             user_id = #{userId}
 
     </update>

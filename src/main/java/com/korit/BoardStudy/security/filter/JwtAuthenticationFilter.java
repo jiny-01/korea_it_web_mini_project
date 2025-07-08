@@ -44,6 +44,7 @@ public class JwtAuthenticationFilter implements Filter {
 
         if (jwtUtils.isBearer(authorization)) {
             String accessToken = jwtUtils.removeBearer(authorization);
+            System.out.println("Authorization header: " + accessToken);
 
             try {
                 Claims claims = jwtUtils.getClaims(accessToken);

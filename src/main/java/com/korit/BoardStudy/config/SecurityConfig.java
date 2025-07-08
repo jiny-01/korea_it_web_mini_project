@@ -61,7 +61,7 @@ public class SecurityConfig {
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/auth/**", "/oauth2/**", "/login/oauth2/**").permitAll();    //요청주소 - 허용할 주소
+            auth.requestMatchers("/auth/**", "/oauth2/**", "/login/oauth2/**", "/mail/verify").permitAll();    //요청주소 - 허용할 주소
             auth.anyRequest().authenticated();                 //위에 주소 제외 모든 요청은 인증필요
         });
 
