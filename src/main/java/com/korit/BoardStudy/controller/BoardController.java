@@ -28,4 +28,10 @@ public class BoardController {
     public ResponseEntity<?> getBoardByBoardId(@PathVariable Integer boardId) {
         return ResponseEntity.ok(boardService.getBoardByBoardId(boardId));
     }
+
+    //게시물 전체 조회
+    @GetMapping("/list")
+    public ResponseEntity<?> getBoardList() {
+        return ResponseEntity.ok(boardService.getBoardList());
+    }
 }

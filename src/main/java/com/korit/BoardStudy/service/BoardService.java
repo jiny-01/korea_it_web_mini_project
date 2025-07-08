@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,5 +65,15 @@ public class BoardService {
 
 
     //게시물 전체 조회
+    public ApiRespDto<?> getBoardList () {
+        List<Board> boardList = boardRepository.getBoardList();
+        if (boardList.isEmpty()) {
+            return new ApiRespDto<>("failed", "조회할 게시물 없음", null);
+        } else {
+            return new ApiRespDto<>("success", "게시물 목록 조회 성공", boardList);
+        }
+    }
+
+
 
 }

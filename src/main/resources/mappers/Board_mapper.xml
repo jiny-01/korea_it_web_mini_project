@@ -27,6 +27,13 @@
             board_id = #{boardId}
     </select>
 
+    <select id="getBoardList" resultMap="BoardResultMap">
+        select
+            *
+        from
+            board_tb
+    </select>
+
 
 
 
