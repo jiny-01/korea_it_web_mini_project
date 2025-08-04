@@ -21,4 +21,7 @@ public interface BoardMapper {
     //게시물 삭제
     int removeBoardByBoardId(Integer boardId);
 
+    //게시물 수정
+    int updateBoardByBoardId(Board board);
+
 }

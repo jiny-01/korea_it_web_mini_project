@@ -2,9 +2,11 @@ package com.korit.BoardStudy.service;
 
 import com.korit.BoardStudy.dto.ApiRespDto;
 import com.korit.BoardStudy.dto.board.AddBoardReqDto;
+import com.korit.BoardStudy.dto.board.UpdateBoardReqDto;
 import com.korit.BoardStudy.entity.Board;
 import com.korit.BoardStudy.repository.BoardRepository;
 import com.korit.BoardStudy.security.model.PrincipalUser;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,4 +104,34 @@ public class BoardService {
         }
     }
 
+    //게시물 수정
+    public ApiRespDto<?> updateBoardByBoardId(UpdateBoardReqDto updateBoardReqDto) {
+        Optional<Board> optionalBoard = boardRepository.getBoardByBoardId(updateBoardReqDto.getBoardId());
+
+        if (optionalBoard.isEmpty()) {
+            return new ApiRespDto<>("failed", "게시물을 찾을 수 없습니다.", null);
+        }
+
+        Board board = optionalBoard.get();
+
+        //수정할 새로운 board 를 newBoard 엔티티로 받음
+        Board newBoard= Board.builder()
+                .boardId(board.getBoardId())
+                .title(updateBoardReqDto.getTitle())
+                .content(updateBoardReqDto.getContent())
+                .userId(board.getUserId())
+                .build();
+
+        try {
+            int result = boardRepository.updateBoardByBoardId(newBoard);
+            if (result != 1) {
+                return new ApiRespDto<>("failed", "게시물 수정 실패", null);
+            }
+
+            return new ApiRespDto<>("success", "게시물 수정 성공", null);
+        } catch (Exception e) {
+            return new ApiRespDto<>("failed", "서버 오류로 게시물 수정 실패 : " + e.getMessage(), null);
+        }
+
+    }
 }
