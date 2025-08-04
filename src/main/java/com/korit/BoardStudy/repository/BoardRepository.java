@@ -28,4 +28,11 @@ public class BoardRepository {
     public List<Board> getBoardList() {
         return boardMapper.getBoardList();
     }
+
+    //게시물 삭제
+    public int removeBoardByBoardId(Integer boardId) {
+        return boardMapper.removeBoardByBoardId(boardId);
+    }
+
+
 }

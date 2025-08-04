@@ -17,4 +17,8 @@ public interface BoardMapper {
 
     //게시물 다건 조회
     List<Board> getBoardList();
+
+    //게시물 삭제
+    int removeBoardByBoardId(Integer boardId);
+
 }

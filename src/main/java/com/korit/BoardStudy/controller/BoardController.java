@@ -32,6 +32,13 @@ public class BoardController {
     //게시물 전체 조회
     @GetMapping("/list")
     public ResponseEntity<?> getBoardList() {
+
         return ResponseEntity.ok(boardService.getBoardList());
+    }
+
+    //게시물 삭제
+    @PostMapping("/remove/{boardId}")
+    public ResponseEntity<?> removeBoardByBoardId(@PathVariable Integer boardId, @AuthenticationPrincipal PrincipalUser principalUser) {
+        return ResponseEntity.ok(boardService.removeBoardByBoardId(boardId, principalUser));
     }
 }
