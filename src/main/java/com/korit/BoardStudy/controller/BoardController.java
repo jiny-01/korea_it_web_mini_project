@@ -44,7 +44,7 @@ public class BoardController {
     }
 
     //게시물 수정
-    @PostMapping("/update/{boardId}")
+    @PostMapping("/update")
     public ResponseEntity<?> updateBoardByBoardId(@RequestBody UpdateBoardReqDto updateBoardReqDto) {
         return ResponseEntity.ok(boardService.updateBoardByBoardId(updateBoardReqDto));
     }
