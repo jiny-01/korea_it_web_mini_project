@@ -45,11 +45,11 @@
         update
             board_tb
         set
-            title = #{title}
-            content = #{content}
+            title = #{title},
+            content = #{content},
             update_dt = now()
         where
-            board_it = #{boardId}
+            board_id = #{boardId}
     </update>
 
 
