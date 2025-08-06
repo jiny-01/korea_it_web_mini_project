@@ -43,7 +43,7 @@ public class BoardController {
         return ResponseEntity.ok(boardService.removeBoardByBoardId(boardId, principalUser));
     }
 
-    //게시물 수정
+    //게시물 수정 기능 추가
     @PostMapping("/update")
     public ResponseEntity<?> updateBoardByBoardId(@RequestBody UpdateBoardReqDto updateBoardReqDto) {
         return ResponseEntity.ok(boardService.updateBoardByBoardId(updateBoardReqDto));
