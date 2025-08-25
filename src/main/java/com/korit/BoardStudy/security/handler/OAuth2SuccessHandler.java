@@ -56,7 +56,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         //연동 안되어있을 때 - provider, userid, email 주고 연동할지/새로 가입할지 선택하는 페이지 반환
         if (optionalOAuth2User.isEmpty()) {
             response.sendRedirect
-                    ("http://localhost:3030/auth/oauth2?provider=" + provider + "&providerUserId=" + providerUserId + "&email=" + email);    //리다이렉트시킬 프론트주소 들어감
+                    ("http://localhost:5173/auth/oauth2?provider=" + provider + "&providerUserId=" + providerUserId + "&email=" + email);    //리다이렉트시킬 프론트주소 들어감
             return;
         }
 
@@ -72,7 +72,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             accessToken = jwtUtils.generateAccessToken(optionalUser.get().getUserId().toString());
         }
 
-        response.sendRedirect("http://localhost:3000/auth/signin?accessToken=" + accessToken);
+        response.sendRedirect("http://localhost:5173/auth/signin?accessToken=" + accessToken);
 
     }
 
