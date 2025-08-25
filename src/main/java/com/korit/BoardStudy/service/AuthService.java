@@ -8,15 +8,22 @@ import com.korit.BoardStudy.entity.UserRole;
 import com.korit.BoardStudy.repository.UserRepository;
 import com.korit.BoardStudy.repository.UserRoleRepository;
 import com.korit.BoardStudy.security.jwt.JwtUtils;
+import com.korit.BoardStudy.security.model.PrincipalUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
 
 @Service
 public class AuthService {
+
+
 
     @Autowired
     private UserRepository userRepository;
