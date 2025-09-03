@@ -74,6 +74,6 @@ public class JwtAuthenticationFilter implements Filter {
             }
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);   //
     }
 }
