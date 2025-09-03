@@ -21,7 +21,7 @@ public class PrincipalUser implements UserDetails {
     @JsonIgnore
     private String password;
     private String email;
-    private String profileimg;
+    private String profileImg;
     private List<UserRole> userRoles;
 
     //userRole(rolename 가져와서) 통해 Simple~ (권한 객체)를 만드는 것
