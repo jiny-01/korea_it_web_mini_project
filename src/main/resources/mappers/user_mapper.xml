@@ -23,6 +23,7 @@
         <result property="username" column="username" />
         <result property="password" column="password" />
         <result property="email" column="email" />
+        <result property="profileImg" column="profile_img" />
         <result property="createDt" column="create_dt" />
         <result property="updateDt" column="update_dt" />
         <collection property="userRoles" resultMap="UserRoleResultMap" />
@@ -31,7 +32,7 @@
     <insert id="addUser" useGeneratedKeys="true" keyProperty="userId">
         insert into
             user_tb(user_id, username, password, email, create_dt, update_dt)
-        values(0, #{username}, #{password}, #{email}, now(), null)
+        values(0, #{username}, #{password}, #{email}, "https://firebasestorage.googleapis.com/v0/b/react-board-jiny.firebasestorage.app/o/profile-img%2Fimage_first.png?alt=media&amp;token=00af1083-39f1-402b-b803-7b6520aa4b5b", now(), null)
     </insert>
 
 
@@ -41,6 +42,7 @@
             ut.username,
             ut.password,
             ut.email,
+            ut.profile_img,
             ut.create_dt,
             ut.update_dt,
 
@@ -68,6 +70,7 @@
         ut.username,
         ut.password,
         ut.email,
+        ut.profile_img,
         ut.create_dt,
         ut.update_dt,
 
@@ -95,6 +98,7 @@
         ut.username,
         ut.password,
         ut.email,
+        ut.profile_img,
         ut.create_dt,
         ut.update_dt,
 
@@ -117,7 +121,7 @@
     </select>
 
     <update id="updatePassword">
-        update
+        update from
             user_tb
         set
             password = #{password},
@@ -126,5 +130,14 @@
             user_id = #{userId}
     </update>
 
+    <update id="updateProfileImg">
+        update from
+            user_tb
+        set
+            profile_img = #{profileImg},
+            update_dt = now()
+        where
+            user_id = #{userId}
+    </update>
 
 </mapper>

@@ -72,7 +72,8 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             accessToken = jwtUtils.generateAccessToken(optionalUser.get().getUserId().toString());
         }
 
-        response.sendRedirect("http://localhost:5173/auth/signin?accessToken=" + accessToken);
+        response.sendRedirect("http://localhost:5173/auth/oauth2/signin?accessToken=" + accessToken);
+
 
     }
 
